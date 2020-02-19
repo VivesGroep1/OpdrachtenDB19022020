@@ -12,6 +12,7 @@ public class Controller {
     Connection connection;
     public void initialize() throws SQLException {
         connection = Database.getInstance().getConnection();
+        System.out.println("test");
     }
 
     public void Click_Vooruit(MouseEvent mouseEvent) {
