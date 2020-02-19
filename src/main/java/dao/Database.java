@@ -56,7 +56,15 @@ public class Database  {
     private Connection createConnection() {
         //Het database Object aanmaken
         Connection dbConnection = null;
-        //TODO 3 : Vervolledig de methode createConnection()
+        try {
+            Class.forName(jdbcDriver);
+            dbConnection = DriverManager.getConnection(url , user , password);
+            System.out.println(" het lukt");
+        }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null , ex);
+        }
         return dbConnection;
     }
 
