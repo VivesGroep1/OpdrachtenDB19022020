@@ -12,5 +12,6 @@
       <Label layoutX="64.0" layoutY="65.0" text="Zoekterm:" />
       <TextArea fx:id="txtResultaten" layoutX="65.0" layoutY="99.0" prefHeight="200.0" prefWidth="469.0" />
       <Button fx:id="btnZoeken" layoutX="66.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#click_btnZoeken" prefHeight="26.0" prefWidth="470.0" text="Zoeken" />
+      <Label layoutX="64.0" layoutY="53.0" text="zoek op familie" />
    </children>
 </AnchorPane>
