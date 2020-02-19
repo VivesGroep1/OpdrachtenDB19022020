@@ -43,6 +43,10 @@ public class Database  {
             Properties prop = new Properties();
             // load a properties file
             prop.load(inputStream);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             // get the property value
             jdbcDriver = prop.getProperty("db.jdbcDriver");
             url = prop.getProperty("db.url");
@@ -56,7 +60,19 @@ public class Database  {
     private Connection createConnection() {
         //Het database Object aanmaken
         Connection dbConnection = null;
+<<<<<<< Updated upstream
         //TODO 3 : Vervolledig de methode createConnection()
+=======
+        try {
+
+            Class.forName(jdbcDriver);
+
+            dbConnection = DriverManager.getConnection(url,user,password);
+            System.out.println("created DB connection...");
+        }catch (ClassNotFoundException | SQLException ex){
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null,ex);
+        }
+>>>>>>> Stashed changes
         return dbConnection;
     }
 
