@@ -64,6 +64,6 @@ public class Controller {
     public void zoekbuttonClicked(MouseEvent mouseEvent) {
         String zoekkterm = ZoekTExtfield.getText();
 
-        
+
     }
 }
