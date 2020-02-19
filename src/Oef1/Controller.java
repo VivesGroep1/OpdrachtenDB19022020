@@ -16,6 +16,8 @@ public class Controller {
     }
 
     public void Click_Vooruit(MouseEvent mouseEvent) {
+
+
     }
 
     public void Click_Achteruit(MouseEvent mouseEvent) {

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="mssql-jdbc-7.4.1.jre11-shaded">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/sqljdbc_7.4.1.0_enu/Microsoft JDBC Driver 7.4 for SQL Server/sqljdbc_7.4/enu/mssql-jdbc-7.4.1.jre11-shaded.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

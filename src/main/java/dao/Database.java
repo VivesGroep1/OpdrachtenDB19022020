@@ -57,7 +57,7 @@ public class Database  {
         //Het database Object aanmaken
         Connection dbConnection = null;
         try {
-            Class.forName(jdbcDriver);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             dbConnection = DriverManager.getConnection(url , user , password);
             System.out.println(" het lukt");
         }
