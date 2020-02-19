@@ -1,8 +1,16 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Oef2.Controller">
+   <children>
+      <TextField fx:id="txtZoekterm" layoutX="255.0" layoutY="61.0" prefHeight="26.0" prefWidth="279.0" />
+      <Label layoutX="64.0" layoutY="65.0" text="Zoekterm:" />
+      <TextArea fx:id="txtResultaten" layoutX="65.0" layoutY="99.0" prefHeight="200.0" prefWidth="469.0" />
+      <Button fx:id="btnZoeken" layoutX="66.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#click_btnZoeken" prefHeight="26.0" prefWidth="470.0" text="Zoeken" />
+   </children>
+</AnchorPane>
