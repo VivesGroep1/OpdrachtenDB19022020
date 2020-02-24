@@ -70,8 +70,7 @@ public class StudentDao {
 
     public void createStudent(Student student) throws SQLException {
         stmtInsert.setString(1, student.getNaam());
-        stmtInsert.setDate(2,
-                     new Date(student.getGeboorteDatum().getTime()));
+        stmtInsert.setDate(2,new Date(student.getGeboorteDatum().getTime()));
         stmtInsert.executeUpdate();
         ResultSet rs = stmtInsert.getGeneratedKeys();
         rs.next();
