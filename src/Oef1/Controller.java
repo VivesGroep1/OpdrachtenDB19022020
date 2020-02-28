@@ -5,7 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import main.java.dao.Database;
+import main.java.dao.plantdao;
 import main.java.model.Student;
+import main.java.model.plant;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,23 +20,22 @@ public class Controller {
     public Button zoekbutton;
     Connection connection;
     int getal = 1;
+    private Connection dbConnection;
 
     public void initialize() throws SQLException {
         connection = Database.getInstance().getConnection();
+        dbConnection = Database.getInstance().getConnection();
+
         System.out.println("test");
     }
 
     public void Click_Vooruit(MouseEvent mouseEvent) throws SQLException {
        try {
-            String sql = "select * from plant where plant_id = " + getal;
-            System.out.println(sql);
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            System.out.println(rs.toString());
-            while (rs.next()) {
-                lblResultaat.setText(rs.getString("fgsv"));
-            }
-            getal++;
+           plantdao plantdao =  new plantdao(dbConnection);
+
+           plant plantID =  plantdao.getplantById(getal);
+           lblResultaat.setText(plantID.toString());
+           getal++;
         }
         catch (Exception e)
         {
@@ -45,14 +46,10 @@ public class Controller {
     public void Click_Achteruit(MouseEvent mouseEvent) throws SQLException {
         if(getal > 0)
         {
-            String sql = "select * from plant where plant_id = " + getal;
-            System.out.println(sql);
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            System.out.println(rs.toString());
-            while (rs.next()) {
-                lblResultaat.setText(rs.getString("fgsv"));
-            }
+            plantdao plantdao =  new plantdao(dbConnection);
+
+            plant plantID =  plantdao.getplantById(getal);
+            lblResultaat.setText(plantID.toString());
             getal--;
         }
         else

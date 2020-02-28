@@ -6,6 +6,7 @@ module OpdrachtenDB {
 
     opens Oef1;
     opens Oef2;
+    opens test;
 
 
 }
