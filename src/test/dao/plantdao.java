@@ -22,6 +22,8 @@ public class plantdao {
             "DELETE FROM plant WHERE plant_id = ?";
     private static final String GETPLANTBYNAME =
             "SELECT * FROM plant WHERE familie LIKE ?";
+    private static final String GetplantKeuze =
+            "SELECT * FROM plant WHERE ? LIKE ?";
 
     private Connection dbConnection;
 
@@ -31,6 +33,7 @@ public class plantdao {
     private PreparedStatement stmtUpdate;
     private PreparedStatement stmtDelete;
     private PreparedStatement stmgetbyname;
+    private PreparedStatement stmGetplantkeuze;
 
 
     public plantdao(Connection dbConnection) throws SQLException {
@@ -42,6 +45,7 @@ public class plantdao {
         stmtUpdate     = dbConnection.prepareStatement(UPDATEPLANT);
         stmtDelete     = dbConnection.prepareStatement(DELETEPLANT);
         stmgetbyname = dbConnection.prepareStatement(GETPLANTBYNAME);
+        stmGetplantkeuze = dbConnection.prepareStatement(GetplantKeuze);
     }
     public List<plant> getAllPlant() {
         List<plant> plantenlijst = new ArrayList<>();
@@ -150,6 +154,37 @@ public class plantdao {
             System.out.println("in de catch");
         }
 
+        return plantenlijst;
+    }
+    public List<plant> getplantbykeuze(String keuze , String naam) throws SQLException {
+        List<plant> plantenlijst = new ArrayList<>();
+        naam = "%" + naam + "%";
+        try {
+            System.out.println("in de try");
+            System.out.println(naam);
+            System.out.println(keuze);
+            stmGetplantkeuze.setString(1,keuze);
+            stmGetplantkeuze.setString(2,naam);
+            ResultSet resultaat = stmGetplantkeuze.executeQuery();
+            while (resultaat.next()) {
+                plant plant = new plant(resultaat.getInt("plant_id"),
+                        resultaat.getString("type"),
+                        resultaat.getString("familie"),
+                        resultaat.getString("geslacht"),
+                        resultaat.getString("soort"),
+                        resultaat.getString("variatie"),
+                        resultaat.getInt("plantdichtheid_min"),
+                        resultaat.getInt("plantdichtheid_max"),
+                        resultaat.getString("fgsv"));
+                plantenlijst.add(plant);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("in de catch");
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("in de catch");
+        }
+        System.out.println(plantenlijst.size());
         return plantenlijst;
     }
 
