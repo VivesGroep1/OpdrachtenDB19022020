@@ -123,38 +123,7 @@ public class plantdao {
     }
 
     public List<plant> getplantbyname(String naam) throws SQLException {
-        List<plant> plantenlijst = new ArrayList<>();
-        //TODO 4 : Vervolledig de methode getStudentByNaam(String naam) en gebruik de query GETSTUDENTBYNAAM
-        //WHERE naam LIKE ?
-        //=> Zorg ervoor dat als de parameter naam bijvoorbeeld "der" is,
-        //dat de parameter "*der*" wordt, zodat de gebruiker niet zelf de * moet ingeven
-        naam = "%" + naam + "%";
-        try {
-            System.out.println("in de try");
-            System.out.println(naam);
-            stmgetbyname.setString(1,naam);
-            ResultSet rss = stmgetbyname.executeQuery();
-            while (rss.next()) {
-                plant plant =
-                        new plant(rss.getInt("plant_id"),
-                                rss.getString("type"),
-                                rss.getString("familie"),
-                                rss.getString("geslacht"),
-                                rss.getString("soort"),
-                                rss.getString("variatie"),
-                                rss.getInt("plantdichtheid_min"),
-                                rss.getInt("plantdichtheid_max"),
-                                rss.getString("fgsv"));
-                plantenlijst.add(plant);
 
-            }
-        } catch (SQLException ex) {
-            System.out.println("in de catch");
-            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("in de catch");
-        }
-
-        return plantenlijst;
     }
     public List<plant> getplantbykeuze(String keuze , String naam) throws SQLException {
         List<plant> plantenlijst = new ArrayList<>();
