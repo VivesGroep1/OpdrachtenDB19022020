@@ -22,8 +22,8 @@ public class plantdao {
             "DELETE FROM plant WHERE plant_id = ?";
     private static final String GETPLANTBYNAME =
             "SELECT * FROM plant WHERE familie LIKE ?";
-    private static final String GetplantKeuze =
-            "SELECT * FROM plant WHERE ? LIKE ?";
+    private static String GetplantKeuze =
+            "SELECT * FROM plant WHERE param LIKE ?";
 
     private Connection dbConnection;
 
@@ -45,7 +45,6 @@ public class plantdao {
         stmtUpdate     = dbConnection.prepareStatement(UPDATEPLANT);
         stmtDelete     = dbConnection.prepareStatement(DELETEPLANT);
         stmgetbyname = dbConnection.prepareStatement(GETPLANTBYNAME);
-        stmGetplantkeuze = dbConnection.prepareStatement(GetplantKeuze);
     }
     public List<plant> getAllPlant() {
         List<plant> plantenlijst = new ArrayList<>();
@@ -123,17 +122,51 @@ public class plantdao {
     }
 
     public List<plant> getplantbyname(String naam) throws SQLException {
-
-    }
-    public List<plant> getplantbykeuze(String keuze , String naam) throws SQLException {
         List<plant> plantenlijst = new ArrayList<>();
+//TODO 4 : Vervolledig de methode getStudentByNaam(String naam) en gebruik de query GETSTUDENTBYNAAM
+//WHERE naam LIKE ?
+//=> Zorg ervoor dat als de parameter naam bijvoorbeeld "der" is,
+//dat de parameter "*der*" wordt, zodat de gebruiker niet zelf de * moet ingeven
         naam = "%" + naam + "%";
         try {
             System.out.println("in de try");
             System.out.println(naam);
+            stmgetbyname.setString(1,naam);
+            ResultSet rss = stmgetbyname.executeQuery();
+            while (rss.next()) {
+                plant plant =
+                        new plant(rss.getInt("plant_id"),
+                                rss.getString("type"),
+                                rss.getString("familie"),
+                                rss.getString("geslacht"),
+                                rss.getString("soort"),
+                                rss.getString("variatie"),
+                                rss.getInt("plantdichtheid_min"),
+                                rss.getInt("plantdichtheid_max"),
+                                rss.getString("fgsv"));
+                plantenlijst.add(plant);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("in de catch");
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("in de catch");
+        }
+
+        return plantenlijst;
+    }
+    public List<plant> getplantbykeuze(String keuze , String naam) throws SQLException {
+        List<plant> plantenlijst = new ArrayList<>();
+        naam = "'"+"%" + naam + "%"+"'";
+        GetplantKeuze = "SELECT * FROM plant WHERE "+keuze +" LIKE " +naam;
+        try {
+            System.out.println("in de try");
+            System.out.println(naam);
             System.out.println(keuze);
-            stmGetplantkeuze.setString(1,keuze);
-            stmGetplantkeuze.setString(2,naam);
+            stmGetplantkeuze = dbConnection.prepareStatement(GetplantKeuze);
+//            stmGetplantkeuze.setString(1,keuze);
+//            stmGetplantkeuze.setString(2,naam);
+            System.out.println(GetplantKeuze);
             ResultSet resultaat = stmGetplantkeuze.executeQuery();
             while (resultaat.next()) {
                 plant plant = new plant(resultaat.getInt("plant_id"),

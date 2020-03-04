@@ -32,6 +32,7 @@ public class Controller {
         dbConnection = Database.getInstance().getConnection();
     }
     public void ZoekButton_clicked(MouseEvent mouseEvent) throws SQLException {
+        UitkomstTextarea.setText("");
         controleKeuzeZoekterm();
         ZetZoekinfo();
         plantdao plantdao = new plantdao(dbConnection);
