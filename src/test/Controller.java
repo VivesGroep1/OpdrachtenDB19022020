@@ -27,6 +27,7 @@ public class Controller {
     public int keuzenummer;
     public String Keuze;
     private Connection dbConnection;
+    private int getal;
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -47,34 +48,48 @@ public class Controller {
         if(keuzenummer==1)
         {
             zoekInfolabel.setText("kies op naam van familie het hoeft niet volledig te zijn");
+            getal=1;
         }
         if(keuzenummer==2)
         {
             zoekInfolabel.setText("kies op naam van type het hoeft niet volledig te zijn");
+            getal=1;
+
         }
         if(keuzenummer==3)
         {
             zoekInfolabel.setText("kies op naam van geslacht het hoeft niet volledig te zijn");
+            getal=1;
+
         }
         if(keuzenummer==4)
         {
             zoekInfolabel.setText("kies op naam van soort het hoeft niet volledig te zijn");
+            getal=1;
+
         }
         if(keuzenummer==5)
         {
             zoekInfolabel.setText("kies op naam van variatie het hoeft niet volledig te zijn");
+            getal=1;
+
         }
         if(keuzenummer==6)
         {
             zoekInfolabel.setText("je moet een cijfer invullen en we zullen alles teruggeven wat erboven zit");
+            getal=2;
+
         }
         if(keuzenummer==7)
         {
             zoekInfolabel.setText("je moet een cijfer invullen en we zullen alles teruggeven wat eronder zit");
+            getal=3;
+
         }
         if(keuzenummer==8)
         {
             zoekInfolabel.setText("kies op naam van fgsv het hoeft niet volledig te zijn");
+            getal=1;
         }
 
     }
@@ -156,10 +171,9 @@ public class Controller {
             {
                 break;
             }
-            List<plant> plantenlijst = plantdao.getplantbykeuze(Keuze,zoekterm);
+            List<plant> plantenlijst = plantdao.getplantbykeuze(Keuze,zoekterm,getal);
             showplanten("planten bij "+Keuze,plantenlijst);
             break;
-
         }
 
     }

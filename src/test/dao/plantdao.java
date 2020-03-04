@@ -155,10 +155,22 @@ public class plantdao {
 
         return plantenlijst;
     }
-    public List<plant> getplantbykeuze(String keuze , String naam) throws SQLException {
+    public List<plant> getplantbykeuze(String keuze , String naam, int getal) throws SQLException {
         List<plant> plantenlijst = new ArrayList<>();
-        naam = "'"+"%" + naam + "%"+"'";
-        GetplantKeuze = "SELECT * FROM plant WHERE "+keuze +" LIKE " +naam;
+        if(getal ==1)
+        {
+            GetplantKeuze = "SELECT * FROM plant WHERE "+keuze +" LIKE " +naam;
+            naam = "'"+"%" + naam + "%"+"'";
+        }
+        if(getal==2)
+        {
+            GetplantKeuze = "SELECT * FROM plant WHERE "+keuze +"<" +naam;
+        }
+        if(getal==3)
+        {
+            GetplantKeuze = "SELECT * FROM plant WHERE "+keuze +">" +naam;
+        }
+
         try {
             System.out.println("in de try");
             System.out.println(naam);
